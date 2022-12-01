@@ -1,0 +1,13 @@
+{
+    "SQLURL" : {
+        "Login" : "mysql+pymysql://root:qwert12345@localhost:3306/appagent"
+    },
+    
+    "Token" : {
+        "KEY" : "54kl63h543o6yn4o585on43n5fc243857yno83",
+        "ALGORITHM" : "HS256",
+        "ACCESS_TOKEN_EXPIRE_MINUTE" : 30
+    },
+
+    "Workdir" : "/home/nacl/Appagent/app/WorkDir"
+}
