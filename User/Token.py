@@ -3,7 +3,7 @@ from datetime import datetime,timedelta
 import json,os,jwt
 from pydantic import BaseModel
 
-with open(f'{os.path.dirname(__file__)}'.replace('User/Login','Config.json')) as myjwt:
+with open(f'{os.path.dirname(__file__)}'.replace('User','Config.json')) as myjwt:
     myjwt = json.load(myjwt).get('Token')
 
 class Token(BaseModel):
