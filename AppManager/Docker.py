@@ -7,7 +7,7 @@ class Docker:
     def __init__(self,ymlpath:str,container:str,user:dict):
         self.__container = container
         self.__path = Path.getpath(user) 
-        os.chdir(f'{self.__path}/{ymlpath}')
+        os.chdir(f'{self.__path}{ymlpath}')
 
     def log(self)->dict:
         try:  return {'logs': os.system(f'docker-compose logs {self.__container}'),
@@ -17,14 +17,13 @@ class Docker:
 
     def remove(self)->str:
         try:
-            if self.__container == None: os.system(f'docker-compose rm -sv {self.__container}')
-            else: os.system(f'docker-compose rm -s')
+            os.system(f'docker-compose rm -sv {self.__container}')
             return 'Remove Succeed'
         except: raise HTTPException(status_code = 400,detail = 'Remove Error')
 
     def up(self)->str:
          try:
-            os.system(f'docker-compose up -d')
+            os.system(f'docker-compose up -d {self.__container}')
             return 'Up Succeed'
          except: raise HTTPException(status_code = 400,detail = 'Up Error')
 
@@ -41,6 +40,20 @@ class Docker:
         except:
             raise HTTPException(status_code = 400,detail = 'Stop Error')
 
+    def down(self)->str:
+        try:
+            os.system(f'docker-compose down')
+            return 'Down Succeed'
+        except:
+            raise HTTPException(status_code = 400,detail = 'Down Error')
+
+    def start(self)->str:
+        try:
+            os.system(f'docker-compose start {self.__container}')
+            return 'Start Succeed'
+        except:
+            raise HTTPException(status_code = 400,detail = 'Start Error')
+
     def modify(self,content,destpath:str)->str:
         try:
             with open(f'{self.__path}/{destpath}','wb') as f:
@@ -49,3 +62,4 @@ class Docker:
             return 'Modify Succeed'
         except:
             raise HTTPException(status_code = 400,detail = 'Modify Error')
+

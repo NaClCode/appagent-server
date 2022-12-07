@@ -22,8 +22,8 @@ def login(req:Request,name = Form(None),password = Form(None)):
 
 @appuser.post('/Register')
 def register(req:Request,name = Form(None),password = Form(None)):
-    user = CRUD.create_user(name,password,'normal')
-    #except: raise HTTPException(status_code = 400,detail = 'DataBase Error')
+    try: user = CRUD.create_user(name,password,'normal')
+    except: raise HTTPException(status_code = 400,detail = 'DataBase Error')
     if user:
         return 'Succeed'
     else: 
