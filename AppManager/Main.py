@@ -22,6 +22,8 @@ def app(req:Request,CMD,ymlpath = Form(None),container = Form(None),token = Head
     elif CMD == 'Stop': return docker.stop()
     elif CMD == 'Log': return docker.log()
     elif CMD == 'Remove': return docker.remove()
+    elif CMD == 'Start' : return docker.start()
+    elif CMD == 'Down' : return docker.down()
     else: return 'Error'
 
 @appmanager.put('/Modify')
