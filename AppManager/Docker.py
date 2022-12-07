@@ -23,7 +23,7 @@ class Docker:
 
     def up(self)->str:
          try:
-            os.system(f'docker-compose up -d {self.__container}')
+            os.system(f'docker-compose up -d')
             return 'Up Succeed'
          except: raise HTTPException(status_code = 400,detail = 'Up Error')
 

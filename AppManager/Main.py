@@ -18,7 +18,7 @@ def create(req:Request,CMD,gitname = Form(None),gitpassword = Form(None),giturl 
 def app(req:Request,CMD,ymlpath = Form(None),container = Form(None),token = Header(None)):
     docker = Docker.Docker(ymlpath,container,Token.get_access_token(token))
     if CMD == 'Restart': return docker.restart()
-    elif CMD == 'Up': return docker.up
+    elif CMD == 'Up': return docker.up()
     elif CMD == 'Stop': return docker.stop()
     elif CMD == 'Log': return docker.log()
     elif CMD == 'Remove': return docker.remove()

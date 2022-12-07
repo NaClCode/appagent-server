@@ -23,3 +23,24 @@ Token的前运维++h便提出使用Docker统一部署工作：后端在仓库中
    - 修改配置（Nginx, Dockerfile, docker-compose）
    - 获取应用状态和日志
 3. REST API
+
+##配置
+- 必备软件：
+  + Docker
+  + MySQL
+  + Git
+- 必备模块：
+  + fastapi[all]
+  + pymysql
+  + gitpython
+  + sqlachemy
+- 初始化：python3 Init.py
+- 运行：python3 Main.py
+
+##下一步更新（1.0.1.0）
+1. 自动添加域名解析
+2. 硬盘容量监控和清理
+3. 证书管理
+4. 强化鉴权
+5. 打包成docker应用
+6. 修改一些特性
