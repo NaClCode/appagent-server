@@ -1,6 +1,7 @@
-import git,os,sys
+import os,sys
 from fastapi import HTTPException
 sys.path.append(os.path.dirname(__file__))
+from git import Repo
 import Path
 
 class Git:
@@ -12,14 +13,14 @@ class Git:
 
     def clone(self):
         os.system(f'rm -rf {self.__path} && mkdir {self.__path}')
-        repo = git.Repo().init()
-        repo.clone_from(url = self.__giturl,to_path = self.__path,branch = self.__branch)
-        #except: raise HTTPException(status_code = 400,detail = 'Clone Error')
+        repo = Repo.init()
+        try: repo.clone_from(url = self.__giturl,to_path = self.__path,branch = self.__branch)
+        except: raise HTTPException(status_code = 400,detail = 'Clone Error')
 
     def pull(self)->str:
         try:
             os.chdir(self.__path)
-            repo = git.Repo()
+            repo = Repo()
             repo = repo.remote().pull(branch = self.__branch)
             return 'Pull Succeed'
         except:
