@@ -1,9 +1,7 @@
-FROM python
+FROM kalilinux/kali-rolling
 COPY / /appagent-server
 WORKDIR /appagent-server
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-RUN pip install fastapi[all] pyjwt pymysql sqlalchemy gitpython cryptography
-RUN git config --global user.name NaCl
-RUN git config --global user.email nacl@whut.edu.com
+RUN apt update && apt install -y python3 python3-pip docker git
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && pip install pyjwt fastapi[all] pymysql sqlalchemy gitpython cryptography docker-compose
 EXPOSE 8080
 CMD python3 Main.py

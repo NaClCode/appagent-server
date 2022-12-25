@@ -1,4 +1,4 @@
-import os,sys
+import os,sys,subprocess
 from fastapi import HTTPException
 sys.path.append(os.path.dirname(__file__))
 from git import Repo

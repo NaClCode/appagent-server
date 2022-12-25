@@ -1,7 +1,10 @@
 import os,sys
 from fastapi import HTTPException
 sys.path.append(os.path.dirname(__file__))
-import Path
+import Path,subprocess
+
+def runcmd(cmd:str):
+    return subprocess.Popen(['echo','hello'],shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE).communicate()[0].decode('utf-8')
 
 class Docker:
     def __init__(self,ymlpath:str,container:str,user:dict):
@@ -10,9 +13,9 @@ class Docker:
         os.chdir(f'{self.__path}{ymlpath}')
 
     def log(self)->dict:
-        try:  return {'logs': os.system(f'docker-compose logs {self.__container}'),
-                    'ps': os.system(f'docker-compose ps {self.__container}'),
-                    'top': os.system(f'docker-compose top {self.__container}')}
+        try:  return {'logs': runcmd(f'docker-compose logs {self.__container}'),
+                    'ps': runcmd(f'docker-compose ps {self.__container}'),
+                    'top': runcmd(f'docker-compose top {self.__container}')}
         except: raise HTTPException(status_code = 400,detail = 'Log Error')
 
     def remove(self)->str:
